@@ -1,0 +1,35 @@
+<div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+          {{#each courseCatDetails}}
+            <li class="nav-item" role="presentation">
+              <button class="nav-link {{#if @first}}active{{/if}}" id="category-{{this.categoryID}}-tab" data-bs-toggle="tab" data-bs-target="#bordered-category-{{this.categoryID}}" type="button" role="tab" aria-controls="category-{{this.categoryID}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}">{{this.categoryName}}</button>
+            </li>
+          {{/each}}
+        </ul>
+        <div class="tab-content mt-4" id="courseTabContent">
+          {{#each courseCatDetails}}
+            <div class="tab-pane fade {{#if @first}}show active{{/if}}" id="bordered-category-{{this.categoryID}}" role="tabpanel" aria-labelledby="category-{{this.categoryID}}-tab">
+              <div class="row">
+                {{#each this.courses}}
+                  <div class="col-md-3 mb-4">
+                    <div class="card course-card" data-course-id="{{this.courseID}}">
+                        <div class="card-img-container">
+                            <img src="{{prependDotSlash this.courseImagePath}}" class="card-img-top" alt="{{this.title}}">
+                        </div>                     
+                        <div class="card-body">
+                          <h5 class="card-title">{{this.title}}</h5>
+                          <p class="card-text">{{this.description}}</p>
+                        </div>
+                    </div>
+                  </div>
+                {{else}}
+                  <p>No courses available in this category.</p>
+                {{/each}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+</div>
+

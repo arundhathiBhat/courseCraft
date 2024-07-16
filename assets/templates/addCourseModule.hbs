@@ -1,0 +1,136 @@
+<main id="main" class="main">
+    <div id="messDiv" class="alert" style="display: none;"></div>
+    <!-- Course/Module Modal -->
+    <div class="modal fade" id="courseModuleModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modalTitle" class="modal-title"></h5>
+                    <div id="notUnique" class="alert"></div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCourseModule">
+                        <input type="hidden" id="formType">
+                        <input type="hidden" id="itemType">
+                        <input type="hidden" id="itemId">
+                        <div class="row mb-3" id="inputTitleRow">
+                            <label for="inputTitle" class="col-sm-3 col-form-label">Title</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="inputTitle" class="form-control">
+                            </div>
+                        </div>
+                        <div id="fileUploadRow" class="row mb-3">
+                            <label for="inputFile" class="col-sm-3 col-form-label">Course Image</label>
+                            <div class="col-sm-9">
+                                <input type="file" id="inputFile" class="form-control">
+                                <div id="currentFileImage" class="mt-2"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3" id="descriptionRow">
+                            <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea id="inputDescription" class="form-control" style="height: 100px"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3" id="categoryRow">
+                            <label for="inputCategory" class="col-sm-3 col-form-label">Category</label>
+                            <div class="col-sm-9">
+                                <select id="inputCategory" class="form-select" aria-label="Default select example">
+                                    <option selected disabled>Select Category</option>
+                                    {{#each ALLCATEGORIES}}
+                                    <option value={{this.CATEGORYID}}>{{this.CATEGORYNAME}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div id="moduleContentRow" class="row mb-3">
+                            <label for="inputModuleContent" class="col-sm-3 col-form-label">Module Content</label>
+                            <div class="col-sm-9">
+                                <input type="file" id="inputModuleContent" class="form-control">
+                                <div id="currentFileContent" class="mt-2"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="saveChangesButton" type="button" class="btn btn-dark saveChangesButton">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Title and Buttons -->
+    <div class="pagetitle d-flex justify-content-between align-items-center">
+        <h1>All Courses</h1>
+        <button type="button" class="btn btn-dark addCourseBtn" style="background-color: #7a51d2;" id="addCourseBtn">Add Course</button>
+        
+    </div>
+
+    <!-- Course Cards -->
+    <div class="row">
+        
+        {{#each ALLCOURSEMODULE}}
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.categoryName}}</h5>
+                    {{#if this.courses.length}}
+                    {{#each this.courses}}
+                    <div class="course-details mb-3">
+                        <h5 class="course-title d-flex justify-content-between align-items-center">
+                            {{addOne @index}}. {{this.title}}
+                            <span>
+
+                                <button type="button" class="btn editCourseBtn" data-course-id="{{this.courseID}}"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn addModuleBtn" data-course-id="{{this.courseID}}"><i class="bi bi-plus-square"></i></button>
+                                <button type="button" class="btn deleteCourseBtn" data-course-id="{{this.courseID}}"><i class="bi bi-trash"></i></button>
+                            </span>
+                        </h5>
+                        <p class="course-description">{{this.description}}</p>
+                        <h6 style="max-width: 75%; margin-left: auto;">Modules</h6>
+                        {{#if this.modules.length}}
+                        <ul class="list-group list-group-flush" style="max-width: 75%; margin-left: auto;">
+                            {{#each this.modules}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center" data-module-id="{{this.moduleID}}">
+                                <span>{{this.title}}</span>
+                                <span>
+                                    <button type="button" class="btn editModuleBtn" data-module-id="{{this.moduleID}}"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" class="btn deleteModuleBtn" data-module-id="{{this.moduleID}}"><i class="bi bi-trash"></i></button>
+                                </span>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        {{else}}
+                        <p  style="max-width: 75%; margin-left: auto;">No modules in this course.</p>
+                        {{/if}}
+                    </div>
+                    <hr> <!-- Add horizontal line between courses -->
+                    {{/each}}
+                    {{else}}
+                    <p>No courses in the category.</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</main>
+
+<div class="modal fade" id="deleteConfirmation" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-dark" style='background-color:red;' id="deleteConfirm" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Basic Modal-->

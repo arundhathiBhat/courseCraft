@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <style>
+    .outer-border{
+    width:700px; 
+    height:650px;
+     padding:20px; 
+     text-align:center; border: 10px solid #3ab1b7;    
+     background-image: url('https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3RwMjQ0LWJnMS0wNy14LmpwZw.jpg');
+}
+
+.inner-dotted-border{
+    width:650px; 
+    height:600px; 
+    padding:20px;
+     text-align:center; 
+}
+
+.certification{
+    font-size:50px; 
+    color: #000000;
+    font-style: oblique;
+}
+
+.certify{
+    font-size:25px;
+}
+
+.name{
+    font-size:30px;    
+    color: #7143c6;
+    font-style: italic;
+}
+
+.fs-30{
+    font-size:30px;
+    color: #663ab7;
+}
+
+.fs-20{
+    font-size:20px;
+}
+
+.fs-40{
+    font-size:30px;
+}
+    </style>
+</head>
+<body>
+  
+<div class="outer-border">
+    <div class="inner-dotted-border">
+           <span class="certification">Certificate of Completion</span>
+           <br><br>
+           <span class="certify"><i>This is to certify that</i></span>
+           <br><br>
+           <span class="name"><b>{{Name}}</b></span><br/><br/>
+           <span class="certify"><i>has successfully completed the certification</i></span> <br/><br/>
+           <span class="fs-30">{{CourseName}}</span> <br/><br/>
+           
+           <span class="certify"><i>dated</i></span><br>
+          
+          <span class="fs-40">{{certifiedAT}}</span><br/><br/><br/>
+          <span>
+          <i class="bi bi-mortarboard-fill" style="font-size: 2em; color: #663ab7;"></i>
+          <span class="fs-30">CourseCraft</p></span>
+    
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+/* @media (min-width: 1200px) {
+
+    #mainProfile,
+    #footer {
+        
+    }
+  } */
+  #mainProfile {
+    margin-top: 80px;
+    padding: 20px 30px;
+    transition: all 0.3s;
+  }
+  
+  @media (max-width: 1199px) {
+    #mainProfile {
+      padding: 20px;
+    }
+  }

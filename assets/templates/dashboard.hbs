@@ -1,0 +1,69 @@
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+        <div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1>Hi, {{userDetails.USERNAME}}</h1>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <button id="courseCatalogButton" class="btn btn-dark">Show all available courses</button>
+        </div>
+         </div>
+        </div>
+            <br>
+            {{#if enrolledCourse.length}}
+                <h4>Enrolled Courses</h4>
+                <br>
+                <div class="row">
+                    {{#each enrolledCourse}}
+                    <div class="col-md-3 mb-4">
+                            <div class="course-card" data-course-id="{{this.courseID}}">
+                            <div class="card-img-container">
+                            <img src="{{this.courseImagePath}}" class="card-img-top" alt="Course Image">
+                            </div>
+                             <div class="progress" style="border-radius: 0;">
+                                <div class="progress-bar" role="progressbar" style="width: {{this.progress}}%; background-color: green;" aria-valuenow="{{this.progress}}" aria-valuemin="0" aria-valuemax="100">{{this.progress}}%</div>
+                            </div>
+                            <div class="card-body">
+                            <h5 class="card-title">{{this.courseTitle}}</h5>
+                           <button type="button" class="btn btn-dark" data-enrollment-id="{{this.enrollmentID}}">Continue Learning</button>
+                        </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                     <p>You haven't enrolled in any courses yet.</p>
+            {{/if}}
+
+            {{#if completedCourse.length}}
+             <br>
+                <h4>Completed Courses</h4>
+                <br>
+                <div class="row">
+                    {{#each completedCourse}}
+                         <div class="col-md-3 mb-4">
+                            <div class="course-card" data-course-id="{{this.courseID}}">
+                            <div class="card-img-container">
+                            <img src="{{this.courseImagePath}}" class="card-img-top" alt="Course Image">
+                            </div>
+                             <div class="progress" style="border-radius: 0;">
+                                <div class="progress-bar" role="progressbar" style="width: {{this.progress}}%; background-color: green;" aria-valuenow="{{this.progress}}" aria-valuemin="0" aria-valuemax="100">{{this.progress}}%</div>
+                            </div>
+                            <div class="card-body">
+                            <h5 class="card-title">{{this.courseTitle}}</h5>
+                           <button type="button" class="btn btn-dark" id="certDownload" data-enrollment-id="{{this.enrollmentID}}">Download Certificate</button>
+                        </div>
+                      </div>
+                    </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <p>You haven't completed any courses yet.</p>
+            {{/if}}
+            <br>
+           
+        </div>
+    </div>
+</div>

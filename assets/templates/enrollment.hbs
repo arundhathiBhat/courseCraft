@@ -1,0 +1,60 @@
+<main id="main" class="main">
+  <h5 class="card-title">Enrollment Details</h5>
+  <div id="successDiv" class="alert" style="display: none;"></div>
+    <table id="enrollmentDetails" class="table datatable">
+      <thead>
+        <tr>
+          <th scope="col">SI.No</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Email Id</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each ENROLLDETAILS}}
+        <tr>
+          <td>{{incrementedIndex @index}}</td>
+          <td>{{this.title}}</td>
+          <td>{{this.fullName}}</td>
+          <td>{{this.email}}</td>
+          <td data-status="{{this.status}}">
+            {{#if (eqStrict this.status "0")}}
+              Declined
+            {{else}}
+              {{#if (eqStrict this.status "1")}}
+                Approved
+              {{else if (eqStrict this.status "")}}
+                Pending
+              {{/if}}
+            {{/if}}
+          </td>
+          <td align="center">
+            {{#if (eqStrict this.status "")}}
+              <span class="approve-btn" data-enrollmentid="{{this.enrollmentID}}"><i class="bi bi-check-square-fill" style="color:green;"></i></span>
+              <span class="decline-btn"  data-enrollmentid="{{this.enrollmentID}}"><i class="bi bi-x-square-fill"  style="color:red;"></i></span>
+            {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+</main>
+
+<div class="modal fade" id="confirmation" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-dark" id="approveOrDecline" style="background-color:green;" data-bs-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div><!-- End Basic Modal-->
